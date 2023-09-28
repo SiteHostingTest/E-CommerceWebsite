@@ -29,7 +29,7 @@ function dynamicClothingSection(ob) {
   h4.appendChild(h4Text);
 
   let h2 = document.createElement("h2");
-  let h2Text = document.createTextNode("rs  " + ob.price);
+  let h2Text = document.createTextNode("$  " + (parseInt(ob.price)/50).toFixed(2));
   h2.appendChild(h2Text);
 
   boxDiv.appendChild(boxLink);

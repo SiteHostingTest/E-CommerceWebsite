@@ -30,19 +30,19 @@ function dynamicCartSection(ob,itemCounter)
     boxDiv.appendChild(boxh3)
 
     let boxh4 = document.createElement('h4')
-    let h4Text = document.createTextNode('Amount: Rs' + ob.price)
+    let h4Text = document.createTextNode('Amount: $' + (parseInt(ob.price)/50).toFixed(2))
     boxh4.appendChild(h4Text)
     boxDiv.appendChild(boxh4)
 
     // console.log(boxContainerDiv);
 
-    buttonLink.appendChild(buttonText)
+    // buttonLink.appendChild(buttonText)
     cartContainer.appendChild(boxContainerDiv)
     cartContainer.appendChild(totalContainerDiv)
     // let cartMain = document.createElement('div')
     // cartmain.id = 'cartMainContainer'
     // cartMain.appendChild(totalContainerDiv)
-
+    document.getElementById('button').insertAdjacentHTML('afterbegin', '<form action="./orderPlaced.html" method="post" id="form">    <div>      <label for="email">Name</label>      <input required id="name" name="email"/>    </div>  <div>      <label for="email">Email</label>      <input required type="email" id="email" name="email"/>    </div>  <div>      <label for="email">Street Address (We only ship with in US)</label>      <input required  id="street" name="email"/>    </div>    <div>      <label for="email">State</label>      <input required  id="state" name="email"/>    </div>    <div>      <label for="email">City</label>      <input required id="city" name="email"/>    </div>    <div>      <label for="email">Zip Code</label>      <input required id="city" type="number" name="email"/>    </div>        <div>      <button>Place Order</button>    </div></form>');
     return cartContainer
 }
 
@@ -63,7 +63,7 @@ function amountUpdate(amount)
 {
     let totalh4 = document.createElement('h4')
     // let totalh4Text = document.createTextNode(amount)
-    let totalh4Text = document.createTextNode('Amount: Rs ' + amount)
+    let totalh4Text = document.createTextNode('Amount: $ ' + amount)
     totalh4Text.id = 'toth4'
     totalh4.appendChild(totalh4Text)
     totalDiv.appendChild(totalh4)
@@ -76,18 +76,19 @@ let buttonDiv = document.createElement('div')
 buttonDiv.id = 'button'
 totalDiv.appendChild(buttonDiv)
 
-let buttonTag = document.createElement('button')
-buttonDiv.appendChild(buttonTag)
+// let buttonTag = document.createElement('button')
+// buttonDiv.appendChild(buttonTag)
 
-let buttonLink = document.createElement('a')
-buttonLink.href = '/orderPlaced.html?'
-buttonTag.appendChild(buttonLink)
+// let buttonLink = document.createElement('a')
+// buttonLink.href = '/orderPlaced.html?'
+// buttonTag.appendChild(buttonLink)
 
-buttonText = document.createTextNode('Place Order')
-buttonTag.onclick = function()
-{
-    console.log("clicked")
-}  
+// buttonText = document.createTextNode('Place Order')
+// buttonTag.onclick = function()
+// {
+//     console.log("clicked")
+// }  
+
 //dynamicCartSection()
 // console.log(dynamicCartSection());
 
@@ -122,7 +123,8 @@ httpRequest.onreadystatechange = function()
                         itemCounter +=1;
                     }
                 }
-                totalAmount += Number(contentTitle[item[i]-1].price) * itemCounter
+                price = (parseInt(contentTitle[item[i]-1].price)/50).toFixed(2)
+                totalAmount += Number(price) * itemCounter
                 dynamicCartSection(contentTitle[item[i]-1],itemCounter)
                 i += (itemCounter-1)
             }
